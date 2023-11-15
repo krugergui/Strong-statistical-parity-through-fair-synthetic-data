@@ -61,10 +61,10 @@ class AdultDataset:
         # drop the fnlwgt and education-num columns to keep in line with the paper
         return df.drop(columns=["fnlwgt", "education-num"])
 
-    def get_train_test_data(self):
+    def get_train_test_data(self, random_state=42):
         df = self.df
         test_size = 0.2  # 20% of the data will be used for testing
-        test_df = df.sample(frac=test_size)
+        test_df = df.sample(frac=test_size, random_state=random_state)
         train_df = df.drop(test_df.index)  # remove the test data from the original data
 
         return train_df, test_df
