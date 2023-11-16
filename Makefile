@@ -10,6 +10,6 @@ format:
 	black *.py
 
 lint:
-	pylint $(git ls-files '*.py')
+	pylint *
 
 all: install lint test
