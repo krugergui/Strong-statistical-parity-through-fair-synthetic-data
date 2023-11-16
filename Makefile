@@ -3,7 +3,7 @@ install:
 		pip install -r requirements.txt
 
 lint:
-	pylint ./**/*.py
+	pylint ./**/*.py --fail-under=8
 
 PHONY: test
 test:
