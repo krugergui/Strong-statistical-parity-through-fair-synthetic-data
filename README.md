@@ -2,8 +2,6 @@
 
 This repository contains my implementation of the paper "Strong statistical parity through fair synthetic data" - <https://arxiv.org/pdf/2311.03000.pdf>
 
-My line of thought can be found under `Notebooks`, and the code under `scripts`.
-
 # Understanding Fair AI: A Synopsis of "Strong Statistical Parity Through Fair Synthetic Data"
 
 In the ever-evolving landscape of artificial intelligence, ensuring fairness in algorithmic decision-making is a critical concern. The paper "Strong Statistical Parity Through Fair Synthetic Data" delves into approaches aimed at mitigating biases and disparities in AI models. The central focus lies in addressing the challenge of penalizing disadvantaged groups solely based on specific variables, thereby striving for equitable outcomes.
