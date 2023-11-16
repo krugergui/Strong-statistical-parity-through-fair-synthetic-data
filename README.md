@@ -1,6 +1,6 @@
 # Strong-statistical-parity-through-fair-synthetic-data
 
-This repository contains the my implementation of the paper "Strong statistical parity through fair synthetic data" - <https://arxiv.org/pdf/2311.03000.pdf>
+This repository contains my implementation of the paper "Strong statistical parity through fair synthetic data" - <https://arxiv.org/pdf/2311.03000.pdf>
 
 My line of thought can be found under `Notebooks`, and the code under `scripts`.
 
