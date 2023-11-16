@@ -26,7 +26,7 @@ The prospect of aligning the proportions of these groups holds significant promi
 
 This is better visualized in the figure 1:
 
-![Alt text](images/image.png)
+![Alt text](Images/image.png)
 Figure 1: the effect of the value of the fairness parameter (λ) on the probability of positive outcome for the unprivilidged group
 
 - Two crucial requirements for fairness were identified - the synthetic data generator must preserve the distribution of real data, especially in terms of positive rates for different groups, and the downstream model must accurately predict the target variable in line with the synthetic data generator.
@@ -35,5 +35,5 @@ Figure 1: the effect of the value of the fairness parameter (λ) on the probabil
 
 The figure 2 below ilustrates the effect of different Fairness Parameter (λ) over various methods and how we can optimize the fairness metric (SPD) with only marginal decrease in other evaluation metrics.
 
-![Alt text](images/image-1.png)
+![Alt text](Images/image-1.png)
 Figure 2: Values of lambda on the evaluation metrics over various models
