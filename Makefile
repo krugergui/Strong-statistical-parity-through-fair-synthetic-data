@@ -10,6 +10,6 @@ format:
 	black *.py
 
 lint:
-	pylint --disable=R,C hello.py
+	pylint $(git ls-files '*.py')
 
 all: install lint test
