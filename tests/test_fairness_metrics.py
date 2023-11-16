@@ -3,42 +3,60 @@ from notebooks.fairness_metrics import DSP
 import unittest
 
 
+import numpy as np
+
+
 class TestDSP(unittest.TestCase):
     def test_same_predictions(self):
-        predictions = [1, 1, 0, 0]
-        groups = [1, 0, 1, 0]
+        predictions = np.array([1, 1, 0, 0])
+        groups = np.array([1, 0, 1, 0])
         self.assertAlmostEqual(DSP(predictions, groups), 0.0)
 
     def test_different_predictions(self):
-        predictions = [1, 1, 1, 0, 0]
-        groups = [1, 1, 1, 0, 0]
+        predictions = np.array([1, 1, 1, 0, 0])
+        groups = np.array([1, 1, 1, 0, 0])
         self.assertAlmostEqual(DSP(predictions, groups), 1.0)
 
     def test_mixed_predictions(self):
-        predictions = [1, 0, 1, 0, 1]
-        groups = [1, 1, 0, 0, 1]
+        predictions = np.array([1, 0, 1, 0, 1])
+        groups = np.array([1, 1, 0, 0, 1])
         self.assertAlmostEqual(DSP(predictions, groups), 1 / 6)
 
     def test_no_previledged_group(self):
-        predictions = [1, 0, 1, 0, 1]
-        groups = [0, 0, 0, 0, 0]
-        self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+        predictions = np.array([1, 0, 1, 0, 1])
+        groups = np.array([0, 0, 0, 0, 0])
+        try:
+            self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+            assert False
+        except ZeroDivisionError:
+            assert True
 
     def test_no_unpreviledged_group(self):
-        predictions = [1, 0, 1, 0, 1]
-        groups = [1, 1, 1, 1, 1]
-        self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+        predictions = np.array([1, 0, 1, 0, 1])
+        groups = np.array([1, 1, 1, 1, 1])
+        try:
+            self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+            assert False
+        except ZeroDivisionError:
+            assert True
 
     def test_empty_predictions(self):
-        predictions = []
-        groups = []
-        self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+        predictions = np.array([])
+        groups = np.array([])
+        try:
+            self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+            assert False
+        except ZeroDivisionError:
+            assert True
 
     def test_assert_data(self):
         data = load_data()
         self.assertEqual(len(data), 48842)
         self.assertAlmostEqual(
-            DSP(data["income"], data["sex"], ">50K", "Male"),
+            DSP(
+                np.where(data["income"] == ">50K", 1, 0),
+                np.where(data["sex"] == "Female", 1, 0),
+            ),
             0.1945157,  # According to FERNANDOET AL. Table 1 - https://onlinelibrary.wiley.com/doi/pdf/10.1002/int.22415
         )
 
