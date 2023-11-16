@@ -243,7 +243,6 @@ tomli==2.0.1
 tomlkit==0.12.3
 toolz==0.12.0
 torchmetrics==0.11.4
-torchvision==0.14.1+cpu
 tornado==6.3.3
 tqdm==4.65.2
 traitlets==5.13.0
