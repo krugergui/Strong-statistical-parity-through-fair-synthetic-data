@@ -1,8 +1,6 @@
 import time
 
 import numpy as np
-from numba import float64 as double
-from numba import int8 as small_int
 from numba import njit, prange
 
 PREVILEDGED = 1
@@ -65,8 +63,6 @@ def calculate_true_positive_rate(
         (float, float): The TPR for the underpreviledged group and the TPR for the previledged group.
     """
     true_positive_1 = true_positive_2 = false_negative_1 = false_negative_2 = 0
-    POSITIVE_OUTCOME = PREVILEDGED = 1
-    NEGATIVE_OUTCOME = UNPREVILEDGED = 0
 
     assert predictions.shape[0] == groups.shape[0] == labels.shape[0]
 
@@ -110,6 +106,16 @@ def calculate_true_positive_rate(
 
 @njit("float64[::1](float64[:], int64[:])", parallel=True)
 def run_all_DSP_thresholds(predictions: np.array, list_protected: np.array) -> np.array:
+    """
+    Runs all DSP thresholds on the given predictions and list of protected values.
+
+    Args:
+        predictions (np.array): An array of predictions.
+        list_protected (np.array): An array of protected values.
+
+    Returns:
+        np.array: An array containing demographic statistical parity values for each threshold.
+    """
     return_array = np.empty(
         101,
     )
@@ -127,6 +133,17 @@ def run_all_DSP_thresholds(predictions: np.array, list_protected: np.array) -> n
 def run_all_TRP_thresholds(
     predictions: np.array, list_protected: np.array, labels: np.array
 ) -> np.array:
+    """
+    A function that runs all threshold values for a given set of predictions, list of protected attributes, and labels.
+
+    Parameters:
+        predictions (np.array): An array of predicted values.
+        list_protected (np.array): An array of protected attributes.
+        labels (np.array): An array of true labels.
+
+    Returns:
+        np.array: An array of true positive rates for each threshold value.
+    """
     return_array = np.empty(
         (
             101,
@@ -144,25 +161,3 @@ def run_all_TRP_thresholds(
         )
 
     return return_array
-
-
-if __name__ == "__main__":
-    start_time = time.time()
-
-    run_all_TRP_thresholds(
-        np.array([0.5, 0.4, 0.3, 0.8, 0.6], dtype=np.float64),
-        np.array([1, 1, 0, 0, 1]),
-        np.array([1, 1, 0, 0, 1]),
-    )
-
-    print("--- %s seconds ---" % (time.time() - start_time))
-
-    start_time = time.time()
-
-    run_all_TRP_thresholds(
-        np.array([0.5, 0.4, 0.3, 0.8, 0.6], dtype=np.float64),
-        np.array([1, 1, 0, 0, 1]),
-        np.array([1, 1, 0, 0, 1]),
-    )
-
-    print("--- %s seconds ---" % (time.time() - start_time))

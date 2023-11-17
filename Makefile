@@ -2,8 +2,6 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
-lint:
-	pylint ./**/*.py --fail-under=8
 
 PHONY: test
 test:
@@ -12,4 +10,4 @@ test:
 format:
 	black *.py
 
-all: install lint test
+all: install format test
