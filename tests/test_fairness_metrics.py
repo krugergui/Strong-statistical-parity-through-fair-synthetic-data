@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from notebooks.fairness_metrics import DSP
+from notebooks.fairness_metrics import calculcate_demografic_statistical_parity
 
 
 class TestDSP(unittest.TestCase):
@@ -18,7 +18,9 @@ class TestDSP(unittest.TestCase):
         """
         predictions = np.array([1, 1, 0, 0])
         groups = np.array([1, 0, 1, 0])
-        self.assertAlmostEqual(DSP(predictions, groups), 0.0)
+        self.assertAlmostEqual(
+            calculcate_demografic_statistical_parity(predictions, groups), 0.0
+        )
 
     def test_different_predictions(self):
         """
@@ -31,7 +33,9 @@ class TestDSP(unittest.TestCase):
         """
         predictions = np.array([1, 1, 1, 0, 0])
         groups = np.array([1, 1, 1, 0, 0])
-        self.assertAlmostEqual(DSP(predictions, groups), 1.0)
+        self.assertAlmostEqual(
+            calculcate_demografic_statistical_parity(predictions, groups), 1.0
+        )
 
     def test_mixed_predictions(self):
         """
@@ -44,7 +48,9 @@ class TestDSP(unittest.TestCase):
         """
         predictions = np.array([1, 0, 1, 0, 1])
         groups = np.array([1, 1, 0, 0, 1])
-        self.assertAlmostEqual(DSP(predictions, groups), 1 / 6)
+        self.assertAlmostEqual(
+            calculcate_demografic_statistical_parity(predictions, groups), 1 / 6
+        )
 
     def test_no_previledged_group(self):
         """
@@ -58,7 +64,9 @@ class TestDSP(unittest.TestCase):
         predictions = np.array([1, 0, 1, 0, 1])
         groups = np.array([0, 0, 0, 0, 0])
         try:
-            self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+            self.assertAlmostEqual(
+                calculcate_demografic_statistical_parity(predictions, groups), -1.0
+            )
             assert False
         except ZeroDivisionError:
             assert True
@@ -75,7 +83,9 @@ class TestDSP(unittest.TestCase):
         predictions = np.array([1, 0, 1, 0, 1])
         groups = np.array([1, 1, 1, 1, 1])
         try:
-            self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+            self.assertAlmostEqual(
+                calculcate_demografic_statistical_parity(predictions, groups), -1.0
+            )
             assert False
         except ZeroDivisionError:
             assert True
@@ -88,10 +98,12 @@ class TestDSP(unittest.TestCase):
         `predictions` and `groups`. It then calls the `DSP` function with these arrays as
         arguments and asserts that a `ZeroDivisionError` exception is raised.
         """
-        predictions = np.array([])
-        groups = np.array([])
+        predictions = np.array([], dtype="int64")
+        groups = np.array([], dtype="int64")
         try:
-            self.assertAlmostEqual(DSP(predictions, groups), -1.0)
+            self.assertAlmostEqual(
+                calculcate_demografic_statistical_parity(predictions, groups), -1.0
+            )
             assert False
         except ZeroDivisionError:
             assert True
@@ -114,7 +126,7 @@ class TestDSP(unittest.TestCase):
         data = load_data()
         self.assertEqual(len(data), 48842)
         self.assertAlmostEqual(
-            DSP(
+            calculcate_demografic_statistical_parity(
                 np.where(data["income"] == ">50K", 1, 0),
                 np.where(data["sex"] == "Female", 1, 0),
             ),
