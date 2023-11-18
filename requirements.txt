@@ -1,6 +1,5 @@
 aiohttp-cors==0.7.0
 autogluon==0.8.2
-black==23.11.0
 catboost==1.2.2
 colorful==0.5.5
 fastai==2.7.13
@@ -10,10 +9,11 @@ hyperopt==0.2.7
 isoduration==20.11.0
 jsonpointer==2.4
 jupyter==1.0.0
+jupyter-black==0.3.4
 lightgbm==3.3.5
 opencensus==0.11.3
-pip-chill==1.0.3
 py-spy==0.3.14
+pylint==3.0.2
 pyrsistent==0.20.0
 pysocks==1.7.1
 pytest-cov==4.1.0

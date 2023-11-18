@@ -8,6 +8,6 @@ test:
 	PYTHONPATH=. pytest
 
 format:
-	black *.py
+	black .
 
 all: install format test

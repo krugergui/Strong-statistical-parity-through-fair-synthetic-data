@@ -65,7 +65,9 @@ class AdultDataset:
 
         obj_columns = df.select_dtypes(["object"]).columns
         df[obj_columns] = df[obj_columns].apply(lambda x: x.str.strip())
-        df[obj_columns] = df[obj_columns].apply(lambda x: x.str.replace(".", "", regex=False))
+        df[obj_columns] = df[obj_columns].apply(
+            lambda x: x.str.replace(".", "", regex=False)
+        )
 
         # drop the fnlwgt and education-num columns to keep in line with the paper
         return df.drop(columns=["fnlwgt", "education-num"])
