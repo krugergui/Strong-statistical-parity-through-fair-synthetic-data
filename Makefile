@@ -2,7 +2,6 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
-
 PHONY: test
 test:
 	PYTHONPATH=. pytest
@@ -10,4 +9,4 @@ test:
 format:
 	black .
 
-all: install format test
+all: install test format

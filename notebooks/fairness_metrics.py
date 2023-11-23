@@ -7,7 +7,7 @@ POSITIVE_OUTCOME = 1
 NEGATIVE_OUTCOME = 0
 
 
-@njit("Tuple((int64, int64, int64, int64))(int64[:], int64[:])", cache=True, parallel=True)
+@njit("Tuple((int64, int64, int64, int64))(int64[:], int64[:])", parallel=True, cache=True)
 def get_groups_stats(predictions: np.array, groups: np.array):
     total_previledged, total_unpreviledged = 0, 0
     positive_unpreviledged, positive_previledged = 0, 0

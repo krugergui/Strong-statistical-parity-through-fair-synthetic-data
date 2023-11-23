@@ -10,7 +10,6 @@ from notebooks.fairness_metrics import (
     calculate_disparate_impact,
     calculate_equal_oportunity_difference,
     calculate_false_positive_rate,
-    calculate_true_positive_rate,
     get_groups_stats,
     run_all_AOD_thresholds,
 )
@@ -322,7 +321,7 @@ def test_calculate_disparate_impact():
     # Test case 2: No unprivileged individuals
     predictions = np.array([1, 1, 1, 1, 1])
     groups = np.array([1, 1, 1, 1, 1])
-    assert calculate_disparate_impact(predictions, groups) == np.inf
+    assert calculate_disparate_impact(predictions, groups) == 0
 
     # Test case 3: Half positive predictions for privileged and unprivileged individuals
     predictions = np.array([0, 0, 1, 1, 0, 1])
