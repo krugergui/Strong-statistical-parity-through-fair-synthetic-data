@@ -32,9 +32,9 @@ The figure 2 below ilustrates the effect of different Fairness Parameter (λ) ov
 ![Alt text](figures/conclusion_1.png)
 Figure 2: Values of lambda on the evaluation metrics over various models
 
-The paper only showed the effect of Social Parity Difference on the models, wanted to explore how other fairness metrics would be affected, the results are show in figure 3:
+The paper only showed the effect of Social Parity Difference on the models, I wanted to explore how other fairness metrics would be affected, the results are show in figure 3:
 
 ![Alt text](figures/conclusion_2.png)
 Figure 3: the effect of different lambdas various metrics.
 
-As seen above, only Social parity difference and disparate impact difference improved in value, both of which are directly correlated and take into account the unpreviledged group, other metrics that take into account also the previledged group do not fair so well.
+As seen above, only Social parity difference and disparate impact difference improved in value, both of which are directly correlated, other metrics that take into account also the previledged group do not fair so well.
